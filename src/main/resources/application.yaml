@@ -1,0 +1,38 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: devpilot-gateway
+  profiles:
+    include: routers
+  ai:
+    openai:
+      api-key: "your_openai_api_key_here"
+      chat:
+        options:
+          temperature: 0.2
+          model: gpt-3.5-turbo
+        enabled: false
+
+app-common:
+  open-ai-code-completion:
+    request-url: /v1/chat/completions
+    template: |-
+      {
+        "model": "gpt-3.5-turbo",
+        "messages": [
+          {
+            "role": "user",
+            "content": "You are a code completion AI designed to take the surrounding code and shared context into account in order to predict and suggest high-quality code to complete the code enclosed in {OPENING_CODE_TAG} tags.  You only respond with code that works and fits seamlessly with surrounding code. Do not include anything else beyond the code.\nBelow is the code from file path {relativeFilePath}. Review the code outside the XML tags to detect the functionality, formats, style, patterns, and logics in use. Then, use what you detect and reuse methods/libraries to complete and enclose completed code only inside XML tags precisely without duplicating existing implementations. Here is the code:\n```\n{infillPrefix}{OPENING_CODE_TAG}{CLOSING_CODE_TAG}{infillSuffix}\n```\n{OPENING_CODE_TAG}{infillBlock}"
+          }
+        ],
+        "max_tokens": 256,
+        "stop": [
+          "</FILL_CODE_777>",
+          "\n\n"
+        ],
+        "temperature": 0.2,
+        "top_p": 0.5
+      }
+    result-max-lines: -1

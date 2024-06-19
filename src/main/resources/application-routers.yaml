@@ -1,0 +1,31 @@
+spring.cloud.gateway.routes:
+  - id: open-ai-chat-completions
+    uri: https://api.openai.com/v1/chat/completions
+    predicates:
+      - Path=/devpilot/v1/chat/completions
+    metadata:
+      connect-timeout: 200
+      response-timeout: 60000
+    filters:
+      - name: OpenAiChat
+  - id: code-completion-default
+    uri: https://api.openai.com/v1/chat/completions
+    predicates:
+      - Path=/devpilot/v1/code-completion/**
+    metadata:
+      connect-timeout: 200
+      response-timeout: 60000
+    filters:
+      - name: CodeCompletion
+        args:
+          defaultProviderName: openAiProvider
+  - id: message-metrics
+    uri: https://devpilot.zhongan.com
+    predicates:
+      - Path=/devpilot/v1/conversation-messages/**,/devpilot/v1/completion-messages/**
+    metadata:
+      connect-timeout: 200
+      response-timeout: 60000
+    filters:
+      - name: MessageMetrics
+

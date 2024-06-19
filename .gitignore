@@ -1,0 +1,15 @@
+.DS_Store
+target/
+
+*.iml
+.idea/
+
+.settings/
+.classpath
+.project
+
+*.log
+bin
+
+libEncrypt.dylib
+libzaenc.dylib

@@ -56,7 +56,8 @@ public class CodeCompletionGatewayFilterFactory extends AbstractGatewayFilterFac
                 log.info("requestBody: {}", requestBody);
                 LinkedHashMap<String, Object> jsonObject = jacksonMapper.fromJson(requestBody, JacksonMapper.LINKED_HASH_MAP_S2O_TYPE_REFERENCE);
                 String document = (String) jsonObject.get("document");
-                Integer position = Integer.parseInt((String) jsonObject.get("position"));
+                Object positionValue = jsonObject.get("position");
+                Integer position = positionValue instanceof Number ? ((Number) positionValue).intValue() : Integer.parseInt((String) positionValue);
                 String filePath = (String) jsonObject.get("filePath");
                 String completionType = (String) jsonObject.get("completionType");
                 Provider provider = providerMap.get(config.getDefaultProviderName());

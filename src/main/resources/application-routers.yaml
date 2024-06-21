@@ -22,7 +22,7 @@ spring.cloud.gateway.routes:
   - id: message-metrics
     uri: https://devpilot.zhongan.com
     predicates:
-      - Path=/devpilot/v1/conversation-messages/**,/devpilot/v1/completion-messages/**
+      - Path=/devpilot/v1/conversation-messages/**,/devpilot/v1/completion-messages/**,/hub/devpilot/v1/conversation-messages/**,/hub/devpilot/v1/completion-messages/**
     metadata:
       connect-timeout: 200
       response-timeout: 60000

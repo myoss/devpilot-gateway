@@ -7,7 +7,9 @@ spring.cloud.gateway.routes:
       connect-timeout: 200
       response-timeout: 60000
     filters:
+      - name: DevPilotExplainCommand
       - name: OpenAiChat
+
   - id: code-completion-default
     uri: https://api.openai.com/v1/chat/completions
     predicates:

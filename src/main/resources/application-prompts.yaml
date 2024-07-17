@@ -151,4 +151,5 @@ llm-prompt:
     GENERATE_COMMIT_V1:
       model: "gpt-3.5-turbo"
       promptTemplate: |+
-        Summarize the git diff with a concise and descriptive commit message. Adopt the imperative mood, present tense, active voice, and include relevant verbs. Remember that your entire response will be directly used as the git commit message."
+        "Write a clean and comprehensive commit message that accurately summarizes the changes made in the given `git diff` output, following the best practices and conventional commit convention. Remember that your entire response will be directly used as the git commit message. The response should be in the language {{locale}}. \n" +
+        "This is the `git diff`:\n" + "{{diff}}"

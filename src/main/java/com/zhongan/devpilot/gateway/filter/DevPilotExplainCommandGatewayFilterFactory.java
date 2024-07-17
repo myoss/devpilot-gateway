@@ -146,6 +146,7 @@ public class DevPilotExplainCommandGatewayFilterFactory extends AbstractGatewayF
                         return newHeaders;
                     }
                 };
+                exchange.getAttributes().put(REQUEST_BODY, new String(bytes, StandardCharsets.UTF_8));
                 return chain.filter(exchange.mutate().request(newRequest).build());
 
             } else {

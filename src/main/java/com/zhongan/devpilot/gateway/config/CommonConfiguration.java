@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  *
  * @author Jerry.Chen
  */
-@EnableConfigurationProperties({AppCommonProperties.class})
+@EnableConfigurationProperties({AppCommonProperties.class, LlmPromptProperties.class})
 @Configuration
 public class CommonConfiguration {
     @Bean
